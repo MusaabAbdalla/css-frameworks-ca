@@ -1,9 +1,5 @@
 
-const API_BASE_URL = "https://api.noroff.dev/api/v1"
-const loginEndpoint = "/social/auth/login"
-const registerEndpoint ="/social/auth/register"
-const loginUrl = `${API_BASE_URL}${loginEndpoint}`
-const registerUrl =`${API_BASE_URL}${registerEndpoint}`
+import { registerUrl, loginUrl } from "./utils/variables.mjs"
 const signUpSelector = document.querySelector("#singup-button")
 const loginSelector = document.querySelector("#login-button")
 
@@ -14,7 +10,6 @@ const signupSubmitButton = document.getElementById("signup-submit")
 let userName
 let userEmail 
 let userPassword 
-
 
 //This part is for selecting Register-form
 signUpSelector.addEventListener("click",()=>{
