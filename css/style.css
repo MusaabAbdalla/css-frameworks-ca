@@ -12837,5 +12837,12 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.middle .liked-by span {
+  margin-left: -2rem;
+}
+
+.middle .liked-by span:first-child {
+  margin: 0;
+}
 
 /*# sourceMappingURL=style.css.map */

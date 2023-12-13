@@ -3,3 +3,13 @@
 @import "../../node_modules/bootstrap/scss/variables";
 @import "variables";
 @import "../../node_modules/bootstrap/scss/bootstrap";
+
+
+.middle .liked-by span{
+    margin-left: -2rem;
+}
+
+.middle .liked-by span:first-child{
+    margin: 0;
+}
+
