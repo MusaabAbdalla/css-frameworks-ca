@@ -63,13 +63,13 @@
             <div class="row">
             <!--=====================LEFT=============================-->
             <div class="left col-2">
-
+                
             </div>
             <!--=====================MIDDLE=============================-->
             <div class="middle col-8">
 
                 <div class=" border-primary shadow rounded mx-auto p-4 my-7 bg-white" style="max-width: 650px">
-                    <p class="h1 text-center">Add new post</p>
+                    <p class="h1 text-center">Create New Post</p>
                     <form method="" id="add-new-post-form"  >
                         <div>
                             <label for="title " class="form-label">Title</label>
@@ -97,8 +97,10 @@
                             <label for="post" class="form-label lead">What is on your mind?</label>
                             <textarea class="form-control" name="body" id="post" rows="4" placeholder="Your post" required></textarea>
                         </div>
-                        <!-- <input type="submit" class="btn btn-primary mt-3 mx-auto d-block fs-3" value="Add post" id="submit-post" /> -->
-                        <button type="button" class="btn btn-primary mt-3 mx-auto d-block fs-3" id="submit-post">Add PPPP</button>
+                        <input type="submit" class="btn btn-primary mt-3 mx-auto d-block fs-3" value="Add post" id="submit-post" />
+                        <div class="alert alert-success mt-5 d-none" id="success-alert">New post has been added!</div>
+                        <div class="alert alert-danger mt-5 d-none" id="danger-alert" >Error</div>
+                        <!-- <button type="button" class="btn btn-primary mt-3 mx-auto d-block rounded-4 fs-3" id="submit-post">Add Post</button> -->
 
 
                     </form>

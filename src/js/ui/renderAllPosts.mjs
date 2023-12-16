@@ -1,10 +1,9 @@
 
-
+const controllButtons = document.createElement("div")
 export default function renderAllPosts(posts){
     posts.forEach((post)=>{
         const date = new Date(post.updated)
         const formatedDate = date.toLocaleString()
-        console.log(formatedDate)
         let media = post.media
 
         if(!post.media){
@@ -12,7 +11,19 @@ export default function renderAllPosts(posts){
         }
         else{
             media = post.media
-        
+        }
+        //this will add delete and edit button only if the user is the owner of the post
+        if(post.author.name === localStorage.getItem("user")){
+            controllButtons.innerHTML = `
+            <span class="d-flex flex-column gap-2">
+                    <button type="button" class="btn btn-primary" id="edit-button"  ><i class="uil uil-edit"></i> edit</button>
+                    <button type="button" class="btn btn-danger" id="delete-button" data-id="${post.id}"><i class="uil uil-trash-alt"></i> delete</button>
+
+                </span>
+            `
+        }
+        else{
+           controllButtons.innerHTML =""
         }
 
 
@@ -29,9 +40,8 @@ export default function renderAllPosts(posts){
                                     <small><b class="me-1">Updated</b>${formatedDate}</small>
                                 </div>
                             </div>
-                            <span>
-                                <i class="uil uil-ellipsis-h"></i>
-                            </span>
+                            ${controllButtons.innerHTML}
+
                         </div>                       
                         <h2 class="mx-auto">${post.title}</h2>
                         <div class="photo overflow-hidden my-1 mx-auto  rounded shadow">

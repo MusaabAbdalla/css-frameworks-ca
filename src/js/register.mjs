@@ -112,8 +112,10 @@ async function userLogin(url){
         const json = await response.json()
         console.log(json)
         const token = json.accessToken
+        const user = json.name
         console.log(token)
         localStorage.setItem("token",token)
+        localStorage.setItem("user", user)
         window.location.replace("/feed")
     }
     catch(error){
