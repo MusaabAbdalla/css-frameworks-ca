@@ -2,15 +2,14 @@
 import { postsUrl, createPostUrl} from "./utils/variables.mjs";
 import renderAllPosts from "./ui/renderAllPosts.mjs"
 import { deletePost } from "./api/deletePost.mjs";
+import {addNewPost} from "./api/addNewPost.mjs"
 const feeds = document.querySelector("#feeds")
-const addPostForm = document.querySelector("#add-new-post-form")
 const tagsInput = document.querySelector("#tags")
 const clearTags = document.querySelector("#clear-tags")
 const tagsView = document.querySelector("#tags-view")
 const submitPost = document.querySelector("#submit-post")
 const token = localStorage.getItem("token")
-const successAlert = document.querySelector("#success-alert")
-const dangerAlert = document.querySelector("#danger-alert")
+const addPostForm = document.querySelector("#add-new-post-form")
 
 
 
@@ -32,6 +31,13 @@ async function getAllPosts(url){
         feeds.innerHTML = ""
         renderAllPosts(posts)
         const editButtons = document.querySelectorAll("#edit-button")
+        editButtons.forEach((button)=>{
+            button.onclick = function(){
+                const id = this.dataset.id
+                window.location.replace(`../post/?id=${id}`)
+            }
+            
+        })
         const deleteButtons = document.querySelectorAll("#delete-button")
         deleteButtons.forEach((button)=>{
             button.onclick = function(){
@@ -40,6 +46,7 @@ async function getAllPosts(url){
                 deletePost(createPostUrl,id)
             }
         })
+
 
         // editButton.addEventListener("click",showmessage())
         // deleteButton.addEventListener("click",showmessage())
@@ -96,69 +103,5 @@ addPostForm.addEventListener("submit",(e)=>{
     addNewPost(createPostUrl,data)
 })
 
-// add new post to the api
-// submitPost.addEventListener("submit",(e)=>{
-//     e.preventDefault()
-    
-//     const title = addPostForm.title.value
-//     const imageUrl = addPostForm.imageUrl.value
-//     const body = addPostForm.body.value
-//     const tags = tagsArray
-//     // console.log(title, imageUrl, body, tags)
-//     const data ={
-//         title:title,
-//         body:body,
-//         tags: tags,
-//         media:imageUrl
-//     }
-//     console.log(data)
-//     // addNewPost(createPostUrl,data)
-
-// })
-
-// This function will add the post to the api if everything is validated
-async function addNewPost(url,data){
-    try {
-        const response = await fetch(url,{
-            method:"POST",
-            headers:{
-                "Content-type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify(data)
-    });
-    console.log(response)
-    const json = await response.json();
-    console.log(json)
-    // If the post is added successfully an Alert will Show with success message
-    if(response.status === 200){
-        console.log("hellllloooooo")
-        successAlert.classList.toggle("d-none");
-        setTimeout(()=>{
-            successAlert.classList.toggle("d-none")
-            addPostForm.reset()
-            location.reload()
-        },1000)
-    }
-    else{
-        console.log(json.errors[0].message)
-        dangerAlert.classList.toggle("d-none")
-        dangerAlert.innerHTML= json.errors[0].message
-        setTimeout(()=>{
-            dangerAlert.classList.toggle("d-none")
-        },1500)
 
 
-    }
-        
-    } catch (error) {
-        console.log(error)
-        
-    }
-
-
-}
-
-function showmessage(){
-    console.log("this is the button")
-}

@@ -16,7 +16,7 @@ export default function renderAllPosts(posts){
         if(post.author.name === localStorage.getItem("user")){
             controllButtons.innerHTML = `
             <span class="d-flex flex-column gap-2">
-                    <button type="button" class="btn btn-primary" id="edit-button"  ><i class="uil uil-edit"></i> edit</button>
+                    <button type="button" class="btn btn-primary" id="edit-button" data-id="${post.id}" ><i class="uil uil-edit"></i> edit</button>
                     <button type="button" class="btn btn-danger" id="delete-button" data-id="${post.id}"><i class="uil uil-trash-alt"></i> delete</button>
 
                 </span>
