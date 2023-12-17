@@ -70,8 +70,8 @@
             <div class="middle col-8">
 
                 <div class=" border-primary shadow rounded mx-auto p-4 my-7 bg-white" style="max-width: 650px">
-                    <p class="h1 text-center">Create New Post</p>
-                    <form method="" id="add-new-post-form"  >
+                    <p class="h1 text-center">Edit Post</p>
+                    <form method="" id="edit-post-form"  >
                         <div>
                             <label for="title " class="form-label">Title</label>
                             <input type="text" name="title" class="form-control" id="title" required />
@@ -86,11 +86,11 @@
                         
                             <label for="tags" class="form-label mt-1">Tags</label>
                         <div class="input-group ">
-                            <input type="text" class="form-control" id="tags" placeholder="Write a tag then press Enter add it or press add button">
+                            <input type="text" class="form-control" id="tags" placeholder="Write a tag then press Enter to add it">
                             <button class="btn btn-outline-primary fs-5" type="button" id="clear-tags">Clear Tags</button>
                         </div>
                         <div>
-                            <input type="text" readonly class="form-control-plaintext" id="tags-view" value="">
+                            <input type="text" name="tagsView" readonly class="form-control-plaintext" id="tags-view" value="">
 
                         </div>
 
@@ -98,14 +98,17 @@
                             <label for="post" class="form-label lead">What is on your mind?</label>
                             <textarea class="form-control" name="body" id="post" rows="4" placeholder="Your post" required></textarea>
                         </div>
-                        <input type="submit" class="btn btn-primary mt-3 mx-auto d-block fs-3" value="Add post" id="submit-post" />
-                        <div class="alert alert-success mt-5 d-none" id="success-alert">New post has been added!</div>
+                        <input type="submit" class="btn btn-primary mt-3 mx-auto d-block fs-3" value="Edit Post" id="submit-post" />
+                        <div class="alert alert-success mt-5 d-none" id="success-alert">Post has been edited</div>
                         <div class="alert alert-danger mt-5 d-none" id="danger-alert" >Error</div>
                         <!-- <button type="button" class="btn btn-primary mt-3 mx-auto d-block rounded-4 fs-3" id="submit-post">Add Post</button> -->
 
 
                     </form>
                 
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary mb-5 fs-1" id="back-button">Button</button>
                 </div>
 
                 <!-- <div class="container-md mx-auto  d-flex flex-column justify-content-between align-items-center my-5">
