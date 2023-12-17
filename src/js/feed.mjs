@@ -99,7 +99,7 @@ addPostForm.addEventListener("submit",(e)=>{
 })
 
 
-// I tried to import fetchAllPost from a file but i got a Promise, I think it has something to do with async code 
+// I tried to import these functions  from a file but i got a Promise, I think it has something to do with async code 
 // thats way this section is very long and ugly
 serachForm.addEventListener("submit",()=>{
     switch(select.value){
@@ -194,10 +194,3 @@ serachForm.addEventListener("submit",()=>{
 })
 
 
-// const str = 'This is my example string!';
-// const substr = 'my';
-// if(str.toLowerCase().includes(substr.toLocaleLowerCase())){
-//     console.log("hello")
-// }
-
-// console.log(str.includes(substr));

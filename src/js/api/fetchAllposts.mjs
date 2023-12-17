@@ -1,5 +1,4 @@
 const token = localStorage.getItem("token")
-let posts 
 export async function fetchAllPosts(url){
     try {
         const data = {
@@ -10,11 +9,9 @@ export async function fetchAllPosts(url){
         }
         const response = await fetch(url,data)
         const json = await response.json()
-         posts = json
         
 
     } catch (error) {
         console.log(error)
     }
-    return posts
 }
