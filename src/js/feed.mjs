@@ -3,13 +3,16 @@ import { postsUrl, createPostUrl} from "./utils/variables.mjs";
 import renderAllPosts from "./ui/renderAllPosts.mjs"
 import { deletePost } from "./api/deletePost.mjs";
 import {addNewPost} from "./api/addNewPost.mjs"
+import { fetchAllPosts } from "./api/fetchAllposts.mjs"; 
 const feeds = document.querySelector("#feeds")
 const tagsInput = document.querySelector("#tags")
 const clearTags = document.querySelector("#clear-tags")
 const tagsView = document.querySelector("#tags-view")
-const submitPost = document.querySelector("#submit-post")
 const token = localStorage.getItem("token")
 const addPostForm = document.querySelector("#add-new-post-form")
+const serachForm = document.querySelector("#search-form")
+const select = document.querySelector("#select")
+const searchInput = document.querySelector("#search-input")
 
 
 
@@ -25,9 +28,7 @@ async function getAllPosts(url){
             }
         }
         const response = await fetch(url,data)
-        console.log(response)
         const posts = await response.json()
-        console.log(posts)
         feeds.innerHTML = ""
         renderAllPosts(posts)
         const editButtons = document.querySelectorAll("#edit-button")
@@ -47,10 +48,6 @@ async function getAllPosts(url){
             }
         })
 
-
-        // editButton.addEventListener("click",showmessage())
-        // deleteButton.addEventListener("click",showmessage())
-        
     } catch (error) {
         console.log(error)
     }
@@ -77,7 +74,6 @@ clearTags.addEventListener("click",()=>{
     tagsInput.value=""
     tagsView.value =""
 })
-console.log(submitPost)
 
 //This will prevent the form from submitting when Enter key is pressed 
 addPostForm.addEventListener("keydown",(e)=>{
@@ -99,9 +95,109 @@ addPostForm.addEventListener("submit",(e)=>{
         tags: tags,
         media:imageUrl
     }
-    console.log(data)
     addNewPost(createPostUrl,data)
 })
 
 
+// I tried to import fetchAllPost from a file but i got a Promise, I think it has something to do with async code 
+// thats way this section is very long and ugly
+serachForm.addEventListener("submit",()=>{
+    switch(select.value){
+        case "1":
+            async function searchById(url){
+                try {
+                    const data = {
+                        method: "GET",
+                        headers:{
+                            Authorization:`Bearer ${token}`
+                        }
+                    }
+                    const response = await fetch(url,data)
+                    const posts = await response.json()
+                    console.log(posts)
+                    const postsFromAuthor = posts.filter((post)=>{
+                        if(post.id === parseInt(searchInput.value)){
+                            return true
+                        }
+                    })
+                    console.log(postsFromAuthor)
+                    feeds.innerHTML=""
+                    renderAllPosts(postsFromAuthor)
 
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            searchById(postsUrl)
+
+            break;
+
+        case "2":
+            async function searchByAuthor(url){
+                try {
+                    const data = {
+                        method: "GET",
+                        headers:{
+                            Authorization:`Bearer ${token}`
+                        }
+                    }
+                    const response = await fetch(url,data)
+                    const posts = await response.json()
+                    console.log(posts)
+                    const postsFromAuthor = posts.filter((post)=>{
+                        if(post.author.name.toLowerCase() === searchInput.value.toLowerCase()){
+                            return true
+                        }
+                    })
+                    console.log(postsFromAuthor)
+                    feeds.innerHTML=""
+                    renderAllPosts(postsFromAuthor)
+
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            searchByAuthor(postsUrl)
+
+            break;
+        case "3":
+            async function searchByContent(url){
+                try {
+                    const data = {
+                        method: "GET",
+                        headers:{
+                            Authorization:`Bearer ${token}`
+                        }
+                    }
+                    const response = await fetch(url,data)
+                    const posts = await response.json()
+                    console.log(posts)
+                    const postsThatContains = posts.filter((post)=>{
+                        if(post.body.toLowerCase().includes(searchInput.value.toLowerCase()) ){
+                            return true
+                        }
+                    })
+                    console.log(postsThatContains)
+                    feeds.innerHTML=""
+                    renderAllPosts(postsThatContains)
+
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            searchByContent(postsUrl)
+            break;
+        default:
+            alert("Please select search catogary")
+    }
+
+})
+
+
+// const str = 'This is my example string!';
+// const substr = 'my';
+// if(str.toLowerCase().includes(substr.toLocaleLowerCase())){
+//     console.log("hello")
+// }
+
+// console.log(str.includes(substr));
